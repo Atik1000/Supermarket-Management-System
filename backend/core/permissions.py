@@ -10,7 +10,7 @@ class IsAdminUser(permissions.BasePermission):
     Permission check for admin users only.
     """
     def has_permission(self, request, view):
-        return request.user and request.user.is_authenticated and request.user.role == 'admin'
+        return request.user and request.user.is_authenticated and request.user.role in ['super_admin', 'admin']
 
 
 class IsAdminOrManager(permissions.BasePermission):
@@ -21,7 +21,7 @@ class IsAdminOrManager(permissions.BasePermission):
         return (
             request.user and 
             request.user.is_authenticated and 
-            request.user.role in ['admin', 'manager']
+            request.user.role in ['super_admin', 'admin', 'manager']
         )
 
 
@@ -33,7 +33,7 @@ class IsCashier(permissions.BasePermission):
         return (
             request.user and 
             request.user.is_authenticated and 
-            request.user.role in ['cashier', 'manager', 'admin']
+            request.user.role in ['cashier', 'manager', 'admin', 'super_admin']
         )
 
 
@@ -43,7 +43,7 @@ class IsOwnerOrAdmin(permissions.BasePermission):
     """
     def has_object_permission(self, request, view, obj):
         # Admins can access everything
-        if request.user.role in ['admin', 'manager']:
+        if request.user.role in ['super_admin', 'admin', 'manager']:
             return True
         
         # Check if object has user_id or user attribute

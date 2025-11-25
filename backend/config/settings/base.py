@@ -34,6 +34,7 @@ DJANGO_APPS = [
 THIRD_PARTY_APPS = [
     'rest_framework',
     'rest_framework_simplejwt',
+    'rest_framework_simplejwt.token_blacklist',
     'corsheaders',
     'django_filters',
     'drf_spectacular',
@@ -143,6 +144,12 @@ AUTH_PASSWORD_VALIDATORS = [
 # AUTHENTICATION
 # ==============================================================================
 AUTH_USER_MODEL = 'accounts.User'
+
+# Authentication backends
+AUTHENTICATION_BACKENDS = [
+    'apps.accounts.backends.EmailBackend',  # Email-based authentication
+    'django.contrib.auth.backends.ModelBackend',  # Fallback to default
+]
 
 AUTH_PASSWORD_VALIDATORS = [
     {
