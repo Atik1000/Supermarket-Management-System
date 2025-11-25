@@ -1,9 +1,54 @@
+'use client';
+
+import { useAuthStore } from '@/lib/store/auth-store';
+import Link from 'next/link';
+
 export default function Home() {
+  const { isAuthenticated, user } = useAuthStore();
+
   return (
     <div className="min-h-screen">
       {/* Hero Section */}
       <div className="bg-gradient-to-r from-blue-600 to-indigo-700 text-white">
         <div className="container mx-auto px-4 py-16">
+          {/* Header Nav */}
+          <div className="flex justify-end mb-8">
+            {isAuthenticated ? (
+              <div className="flex items-center gap-4">
+                <span className="text-sm">Welcome, {user?.first_name || user?.username}!</span>
+                {(user?.role === 'super_admin' || user?.role === 'admin' || user?.role === 'manager') && (
+                  <Link
+                    href="/admin/users"
+                    className="bg-white text-blue-600 px-4 py-2 rounded-lg text-sm font-semibold hover:bg-gray-100 transition"
+                  >
+                    Admin
+                  </Link>
+                )}
+                <Link
+                  href="/profile"
+                  className="bg-white text-blue-600 px-4 py-2 rounded-lg text-sm font-semibold hover:bg-gray-100 transition"
+                >
+                  Profile
+                </Link>
+              </div>
+            ) : (
+              <div className="flex gap-2">
+                <Link
+                  href="/login"
+                  className="bg-white text-blue-600 px-4 py-2 rounded-lg text-sm font-semibold hover:bg-gray-100 transition"
+                >
+                  Login
+                </Link>
+                <Link
+                  href="/register"
+                  className="bg-transparent border-2 border-white px-4 py-2 rounded-lg text-sm font-semibold hover:bg-white hover:text-blue-600 transition"
+                >
+                  Sign Up
+                </Link>
+              </div>
+            )}
+          </div>
+
           <div className="text-center">
             <h1 className="text-5xl font-bold mb-4">
               Welcome to Our Supermarket
@@ -12,18 +57,20 @@ export default function Home() {
               Fresh groceries delivered to your doorstep
             </p>
             <div className="flex gap-4 justify-center">
-              <a
+              <Link
                 href="/products"
                 className="bg-white text-blue-600 px-8 py-3 rounded-lg font-semibold hover:bg-gray-100 transition"
               >
                 Shop Now
-              </a>
-              <a
-                href="/register"
-                className="bg-transparent border-2 border-white px-8 py-3 rounded-lg font-semibold hover:bg-white hover:text-blue-600 transition"
-              >
-                Sign Up
-              </a>
+              </Link>
+              {!isAuthenticated && (
+                <Link
+                  href="/register"
+                  className="bg-transparent border-2 border-white px-8 py-3 rounded-lg font-semibold hover:bg-white hover:text-blue-600 transition"
+                >
+                  Sign Up
+                </Link>
+              )}
             </div>
           </div>
         </div>

@@ -58,29 +58,29 @@
 **Duration:** 5 days
 
 #### Backend Tasks
-- [ ] Create CustomUser model with role field
-- [ ] Create UserProfile model with OneToOne relationship
-- [ ] Create Role and Permission models
-- [ ] Implement post_save signal for UserProfile creation
-- [ ] Create user serializers (registration, login, profile)
-- [ ] Create JWT token serializers with custom claims
-- [ ] Implement authentication views (register, login, logout, refresh)
-- [ ] Create UserViewSet with filtering and search
-- [ ] Add role-based permissions
-- [ ] Write unit tests for models and views
-- [ ] Create initial migrations
+- [x] Create CustomUser model with role field
+- [x] Create UserProfile model with OneToOne relationship
+- [x] Create Role and Permission models
+- [x] Implement post_save signal for UserProfile creation
+- [x] Create user serializers (registration, login, profile)
+- [x] Create JWT token serializers with custom claims
+- [x] Implement authentication views (register, login, logout, refresh)
+- [x] Create UserViewSet with filtering and search
+- [x] Add role-based permissions
+- [x] Write unit tests for models and views
+- [x] Create initial migrations
 
 #### Frontend Tasks
-- [ ] Create login page with form validation
-- [ ] Create registration page with validation
-- [ ] Build auth context using Zustand
-- [ ] Implement token storage (httpOnly cookies)
-- [ ] Create Axios interceptor for token refresh
-- [ ] Build protected route wrapper
-- [ ] Create user profile page
+- [x] Create login page with form validation
+- [x] Create registration page with validation
+- [x] Build auth context using Zustand
+- [x] Implement token storage (localStorage)
+- [x] Create Axios interceptor for token refresh
+- [x] Build protected route wrapper
+- [x] Create user profile page
 - [ ] Build admin user management page
 - [ ] Implement forgot password flow
-- [ ] Create TypeScript interfaces for User types
+- [x] Create TypeScript interfaces for User types
 
 **API Endpoints:**
 ```
