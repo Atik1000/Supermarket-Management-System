@@ -33,15 +33,17 @@ export default function ForgotPasswordPage() {
     try {
       // TODO: Implement password reset API call
       // await apiClient.post('/auth/password-reset/', data);
+      console.log('Password reset requested for:', data.email);
       
       // For now, simulate success
       await new Promise((resolve) => setTimeout(resolve, 1000));
       setSuccessMessage(
         'Password reset instructions have been sent to your email address.'
       );
-    } catch (error: any) {
+    } catch (error: unknown) {
+      const err = error as { response?: { data?: { message?: string } } };
       setErrorMessage(
-        error?.response?.data?.message ||
+        err.response?.data?.message ||
           'Failed to send password reset email. Please try again.'
       );
     } finally {
@@ -57,8 +59,8 @@ export default function ForgotPasswordPage() {
             Forgot your password?
           </h2>
           <p className="mt-2 text-center text-sm text-gray-600">
-            Enter your email address and we'll send you instructions to reset your
-            password.
+            Enter your email address and we&apos;ll send you instructions to reset
+            your password.
           </p>
         </div>
 
@@ -122,7 +124,7 @@ export default function ForgotPasswordPage() {
               </Link>
             </div>
             <div>
-              <span className="text-sm text-gray-600">Don't have an account? </span>
+              <span className="text-sm text-gray-600">Don&apos;t have an account? </span>
               <Link
                 href="/register"
                 className="font-medium text-indigo-600 hover:text-indigo-500 text-sm"

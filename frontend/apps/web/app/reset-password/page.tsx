@@ -62,6 +62,7 @@ function ResetPasswordForm() {
       //   token,
       //   password: data.password,
       // });
+      console.log('Password reset for token:', token, 'New password length:', data.password.length);
 
       // For now, simulate success
       await new Promise((resolve) => setTimeout(resolve, 1000));
@@ -71,9 +72,10 @@ function ResetPasswordForm() {
       setTimeout(() => {
         router.push('/login');
       }, 2000);
-    } catch (error: any) {
+    } catch (error: unknown) {
+      const err = error as { response?: { data?: { message?: string } } };
       setErrorMessage(
-        error?.response?.data?.message ||
+        err.response?.data?.message ||
           'Failed to reset password. The reset link may have expired.'
       );
     } finally {
