@@ -1,0 +1,20 @@
+# Development Dockerfile for Frontend
+FROM node:18-alpine
+
+WORKDIR /app
+
+RUN corepack enable && corepack prepare pnpm@9.0.0 --activate
+
+COPY package.json pnpm-lock.yaml pnpm-workspace.yaml ./
+COPY apps/admin/package.json ./apps/admin/
+COPY apps/web/package.json ./apps/web/
+COPY apps/pos/package.json ./apps/pos/
+COPY packages/*/package.json ./packages/
+
+RUN pnpm install
+
+COPY . .
+
+EXPOSE 3000 3001 3002
+
+CMD ["pnpm", "dev"]

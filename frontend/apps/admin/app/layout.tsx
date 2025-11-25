@@ -12,8 +12,8 @@ const geistMono = localFont({
 });
 
 export const metadata: Metadata = {
-  title: "Supermarket E-commerce",
-  description: "Online shopping for groceries and more",
+  title: "Admin Dashboard - Supermarket Management System",
+  description: "Admin panel for managing supermarket operations",
 };
 
 export default function RootLayout({
