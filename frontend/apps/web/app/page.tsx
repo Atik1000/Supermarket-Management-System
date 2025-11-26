@@ -1,10 +1,18 @@
 'use client';
 
+import { useEffect } from 'react';
 import { useAuthStore } from '@/lib/store/auth-store';
+import { useProducts } from '@/modules/products';
+import { ProductGrid } from '@/modules/products';
 import Link from 'next/link';
 
 export default function Home() {
   const { isAuthenticated, user } = useAuthStore();
+  const { products, loading, fetchFeaturedProducts } = useProducts();
+
+  useEffect(() => {
+    fetchFeaturedProducts();
+  }, [fetchFeaturedProducts]);
 
   return (
     <div className="min-h-screen">
@@ -75,6 +83,22 @@ export default function Home() {
           </div>
         </div>
       </div>
+
+      {/* Featured Products */}
+      {products.length > 0 && (
+        <div className="container mx-auto px-4 py-16">
+          <div className="flex items-center justify-between mb-8">
+            <h2 className="text-3xl font-bold">Featured Products</h2>
+            <Link 
+              href="/products" 
+              className="text-blue-600 hover:text-blue-700 font-semibold"
+            >
+              View All →
+            </Link>
+          </div>
+          <ProductGrid products={products.slice(0, 4)} loading={loading} />
+        </div>
+      )}
 
       {/* Features */}
       <div className="container mx-auto px-4 py-16">
